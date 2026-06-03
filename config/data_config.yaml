@@ -1,0 +1,23 @@
+timbres:
+  - piano
+  - flute
+  #- trumpet
+  #- guitar
+  # - violin
+
+soundfont_num:
+  piano: 0      # Acoustic Grand Piano
+  guitar: 24    # Acoustic Guitar (nylon)
+  violin: 40    # Violin
+  flute: 73     # Flute
+  trumpet: 56   # Trumpet
+
+maestro_data_dir: /home/vtqn/projects/project2/data/maestro-v3.0.0
+maestro_metadata_file: /home/vtqn/projects/project2/data/maestro-v3.0.0/maestro-v3.0.0.csv
+wav_dir: /home/vtqn/projects/project2/data/wav
+spectrogram_dir: /home/vtqn/projects/project2/data/spectrogram # consists of created spectrograms and df with their metadata
+
+num_images_to_create_per_timbre:
+  train: 800
+  validation: 100
+  test: 100
