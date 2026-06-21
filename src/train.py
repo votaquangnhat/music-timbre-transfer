@@ -1,3 +1,4 @@
+import csv
 import os
 from pathlib import Path
 
@@ -22,6 +23,29 @@ from utils import (
 
 logger = get_logger(__name__)
 
+def init_metrics_file(output_dir: str) -> None:
+    metrics_path = Path(output_dir) / "metrics.csv"
+    with open(metrics_path, "w", newline="", encoding="utf-8") as f:
+        writer = csv.DictWriter(f, fieldnames=["step", "train_loss", "val_loss", "lr"])
+        writer.writeheader()
+
+
+def append_metrics(
+    output_dir: str,
+    step: int,
+    train_loss: float | None,
+    val_loss: float | None,
+    lr: float,
+) -> None:
+    metrics_path = Path(output_dir) / "metrics.csv"
+    with open(metrics_path, "a", newline="", encoding="utf-8") as f:
+        writer = csv.DictWriter(f, fieldnames=["step", "train_loss", "val_loss", "lr"])
+        writer.writerow({
+            "step": step,
+            "train_loss": "" if train_loss is None else train_loss,
+            "val_loss": "" if val_loss is None else val_loss,
+            "lr": lr,
+        })
 
 def main() -> None:
     # 1. config, acce, module
@@ -46,6 +70,7 @@ def main() -> None:
     if accelerator.is_main_process:
         Path(config.output_dir).mkdir(parents=True, exist_ok=True)
         save_training_config(config)
+        init_metrics_file(config.output_dir)
 
     module = DiffusionLoRAModule(
         pretrained_model_name_or_path=config.pretrained_model_name_or_path,
@@ -139,10 +164,15 @@ def main() -> None:
 
             if accelerator.sync_gradients:
                 global_step += 1
+
+                train_loss_value = accelerator.gather(loss.detach().reshape(1)).mean().item()
+                lr_value = lr_scheduler.get_last_lr()[0]
+                val_loss_value = None
+
                 progress_bar.update(1)
                 progress_bar.set_postfix(
-                    loss=f"{loss.detach().item():.4f}",
-                    lr=f"{lr_scheduler.get_last_lr()[0]:.2e}",
+                    loss=f"{train_loss_value:.4f}",
+                    lr=f"{lr_value:.2e}",
                 )
 
                 if accelerator.is_main_process and config.save_steps > 0 and global_step % config.save_steps == 0:
@@ -156,14 +186,23 @@ def main() -> None:
                     and config.validation_steps > 0
                     and global_step % config.validation_steps == 0
                 ):
-                    val_loss = compute_validation_loss(
+                    val_loss_value = compute_validation_loss(
                         module=module,
                         val_dataloader=val_dataloader,
                         accelerator=accelerator,
                         weight_dtype=weight_dtype,
                         max_batches=config.validation_max_batches,
                     )
-                    logger.info(f"step={global_step} validation_loss={val_loss:.6f}")
+                    logger.info(f"step={global_step} validation_loss={val_loss_value:.6f}")
+
+                if accelerator.is_main_process:
+                    append_metrics(
+                        output_dir=config.output_dir,
+                        step=global_step,
+                        train_loss=train_loss_value,
+                        val_loss=val_loss_value,
+                        lr=lr_value,
+                    )
 
             if global_step >= max_train_steps:
                 break
