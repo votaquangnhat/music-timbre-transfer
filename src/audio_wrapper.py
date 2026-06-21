@@ -54,7 +54,7 @@ class SpectrogramConverter: # helper class
             max_volume: float = 50,
             power_for_image: float = 0.25
         ) -> Image.Image:
-
+        """return pil rgb image"""
         data = np.power(spectrogram, power_for_image)
         data = data * 255 / max_volume
         data = 255 - data
@@ -143,7 +143,7 @@ class AudioWrapper:
         self.converter = SpectrogramConverter()
         self.audio = None
         # this calculation of slice size will make sure created image has x_res = image_width
-        self.slice_size = (self.converter.image_width) * self.converter.hop_length
+        self.slice_size = (self.converter.image_width) * self.converter.hop_length - 1
         self.number_of_slices = 0
         self.sample_rate = self.converter.sample_rate
 
@@ -175,6 +175,7 @@ class AudioWrapper:
         audio_slice = self.get_audio_slices(index)
         result = self.converter.spectrogram_from_waveform(audio_slice)
         if result.shape != (self.converter.n_mels, self.converter.image_width):
+            print(f'Length of audio slice: {len(audio_slice)}')
             raise ValueError(f"Unexpected spectrogram shape: {result.shape}. Expected ({self.converter.n_mels}, {self.converter.image_width}).")
         return result
 

@@ -12,3 +12,7 @@ wheels/
 data/
 
 _archive/
+
+outputs/
+
+train_colab.ipynb

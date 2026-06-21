@@ -24,4 +24,6 @@ dependencies = [
     "accelerate>=1.13.0",
     "torchvision>=0.26.0",
     "torchcodec>=0.12.0",
+    "huggingface-hub>=1.15.0",
+    "peft>=0.19.1",
 ]

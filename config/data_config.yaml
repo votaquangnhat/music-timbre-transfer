@@ -12,8 +12,10 @@ soundfont_num:
   flute: 73     # Flute
   trumpet: 56   # Trumpet
 
+# maestro data is available locally
 maestro_data_dir: /home/vtqn/projects/project2/data/maestro-v3.0.0
 maestro_metadata_file: /home/vtqn/projects/project2/data/maestro-v3.0.0/maestro-v3.0.0.csv
+
 wav_dir: /home/vtqn/projects/project2/data/wav
 spectrogram_dir: /home/vtqn/projects/project2/data/spectrogram # consists of created spectrograms and df with their metadata
 
