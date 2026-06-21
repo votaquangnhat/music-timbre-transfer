@@ -2,7 +2,7 @@ timbres:
   - piano
   - flute
   #- trumpet
-  #- guitar
+  - guitar
   # - violin
 
 soundfont_num:
