@@ -43,6 +43,10 @@ blender = blender.eval().to(device)
 def load_audio(path, sr):
     audio_full, sr = librosa.load(path, sr=sr)
     audio = audio_full[:audio_length]
+
+    if len(audio) < audio_length:
+        audio = np.pad(audio, (0, audio_length - len(audio)), mode='constant')
+
     audio = torch.from_numpy(audio).reshape(1, 1, -1) / audio.max()
     return audio
 
