@@ -26,4 +26,12 @@ dependencies = [
     "torchcodec>=0.12.0",
     "huggingface-hub>=1.15.0",
     "peft>=0.19.1",
+    "gin>=0.1.6",
+    "gin-config>=0.5.0",
+    "cached-conv>=2.5.0",
+    "einops-exts>=0.0.4",
+    "tensorboard>=2.20.0",
+    "torch-ema>=0.3",
+    "cqt-pytorch>=0.0.5",
+    "nnaudio>=0.3.4",
 ]
