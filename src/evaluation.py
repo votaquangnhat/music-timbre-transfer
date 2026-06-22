@@ -313,7 +313,7 @@ def get_external_reference_waveform(
     path2 = reconstructed target-timbre style wav chosen from dataset
     """
 
-    from src.ismir2024 import genrerate
+    from ismir2024 import genrerate
 
     if not hasattr(args, "external_target_wav_path"):
         raise ValueError(
