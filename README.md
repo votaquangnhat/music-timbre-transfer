@@ -1,11 +1,5 @@
-spectrogram_metadata is like:
+# Project 2
 
-```
-maestro_id	slice	timbres	file_name	subset
-0	16	0	piano	spectrogram_16_slice_0_piano.npy	train
-1	16	1	piano	spectrogram_16_slice_1_piano.npy	train
-2	16	2	piano	spectrogram_16_slice_2_piano.npy	train
-3	16	3	piano	spectrogram_16_slice_3_piano.npy	train
-4	16	4	piano	spectrogram_16_slice_4_piano.npy	train
+This repo contains my attempt to create music timbre transfer model using: spectrograms, LoRA fine-tuning a LDM.
 
-```
+demo can be found in https://votaquangnhat.github.io/music-timbre-transfer/demo/demo.html

@@ -7,7 +7,7 @@ Each row shows the same source melody transformed into a target timbre. The colu
 * **Task**: source-to-target timbre transfer direction
 * **Source audio**: original input audio
 * **LoRA result**: result using my LDM LoRA-based model
-* **ISMIR2024 result**: result using the external reference model
+* **external result**: result using another better method (https://arxiv.org/pdf/2408.00196)
 
 ---
 
@@ -19,7 +19,7 @@ Each row shows the same source melody transformed into a target timbre. The colu
       <th>Task</th>
       <th>Source Audio</th>
       <th>LoRA Result</th>
-      <th>ISMIR2024 Result</th>
+      <th>External Result</th>
     </tr>
   </thead>
 
