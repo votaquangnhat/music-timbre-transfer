@@ -4,9 +4,10 @@ This page presents qualitative audio examples for six directed timbre transfer t
 
 Each row shows the same source melody transformed into a target timbre. The columns compare:
 
+* **Task**: source-to-target timbre transfer direction
 * **Source audio**: original input audio
-* **LoRA result**: result from our Riffusion LoRA-based method
-* **ISMIR2024 result**: result from the external reference model
+* **LoRA result**: result using my LDM LoRA-based model
+* **ISMIR2024 result**: result using the external reference model
 
 ---
 
@@ -15,6 +16,7 @@ Each row shows the same source melody transformed into a target timbre. The colu
 <table>
   <thead>
     <tr>
+      <th>Task</th>
       <th>Source Audio</th>
       <th>LoRA Result</th>
       <th>ISMIR2024 Result</th>
@@ -23,8 +25,8 @@ Each row shows the same source melody transformed into a target timbre. The colu
 
   <tbody>
     <tr>
+      <td><b>Piano → Guitar</b></td>
       <td>
-        <b>Piano → Guitar</b><br>
         <audio controls>
           <source src="assets/audio/piano_to_guitar/source.wav" type="audio/wav">
           Your browser does not support the audio element.
@@ -46,8 +48,8 @@ Each row shows the same source melody transformed into a target timbre. The colu
 
 ```
 <tr>
+  <td><b>Piano → Flute</b></td>
   <td>
-    <b>Piano → Flute</b><br>
     <audio controls>
       <source src="assets/audio/piano_to_flute/source.wav" type="audio/wav">
       Your browser does not support the audio element.
@@ -68,8 +70,8 @@ Each row shows the same source melody transformed into a target timbre. The colu
 </tr>
 
 <tr>
+  <td><b>Guitar → Piano</b></td>
   <td>
-    <b>Guitar → Piano</b><br>
     <audio controls>
       <source src="assets/audio/guitar_to_piano/source.wav" type="audio/wav">
       Your browser does not support the audio element.
@@ -90,8 +92,8 @@ Each row shows the same source melody transformed into a target timbre. The colu
 </tr>
 
 <tr>
+  <td><b>Guitar → Flute</b></td>
   <td>
-    <b>Guitar → Flute</b><br>
     <audio controls>
       <source src="assets/audio/guitar_to_flute/source.wav" type="audio/wav">
       Your browser does not support the audio element.
@@ -112,8 +114,8 @@ Each row shows the same source melody transformed into a target timbre. The colu
 </tr>
 
 <tr>
+  <td><b>Flute → Piano</b></td>
   <td>
-    <b>Flute → Piano</b><br>
     <audio controls>
       <source src="assets/audio/flute_to_piano/source.wav" type="audio/wav">
       Your browser does not support the audio element.
@@ -134,8 +136,8 @@ Each row shows the same source melody transformed into a target timbre. The colu
 </tr>
 
 <tr>
+  <td><b>Flute → Guitar</b></td>
   <td>
-    <b>Flute → Guitar</b><br>
     <audio controls>
       <source src="assets/audio/flute_to_guitar/source.wav" type="audio/wav">
       Your browser does not support the audio element.
@@ -159,10 +161,3 @@ Each row shows the same source melody transformed into a target timbre. The colu
   </tbody>
 </table>
 
----
-
-## Notes
-
-The LoRA model is trained separately for each target timbre. During inference, the source audio spectrogram is edited toward the target timbre using the corresponding target-timbre LoRA checkpoint.
-
-The ISMIR2024 result is used as an external reference baseline for qualitative comparison.
